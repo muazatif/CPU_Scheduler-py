@@ -1,6 +1,19 @@
 singleLayer = True
 
 timer = 0
+#processes to be moved to next layer
+forNextLayer = []
+#processes currently completed
+#  printed at the end of execution to show completion order of processes
+order = []
+switches = []
+#number of processes remaining
+processCounter = 0
+# quanta for round robin in Time Units
+quanta = 2
+# label of last process that executed (for display purposes)
+lastProcess = ''
+
 class Process:
     letter = ''
     timeNeeded = 0
@@ -19,18 +32,7 @@ class Process:
         self.runningTime += 1
         self.sessionTime += 1
 
-#processes to be moved to next layer
-forNextLayer = []
-#processes currently completed
-#  printed at the end of execution to show completion order of processes
-order = []
-switches = []
-#number of processes remaining
-processCounter = 0
-# quanta for round robin in Time Units
-quanta = 2
-# label of last process that executed (for display purposes)
-lastProcess = ''
+
 class Layer:
     #how long it has currently been running
     runningTime = 0
