@@ -176,23 +176,6 @@ def processesToStr(array):
 #       is denoted by the letter 'H'
 h = Layer(None,None, True, True)
 h.letter = 'H'
-# this layer m:
-#       runs for 4 time units before the next layer starts executing
-#       only allows a process to run twice before moving it to the next layer
-#       does round robin
-#       is NOT the last layer
-#       is denoted by the letter 'M'
-m = Layer(4,2, True, False)
-m.letter = 'M'
-# this layer l:
-#       runs for 2 time units before the next layer starts executing
-#       process never moves to another layer at is it is the last layer
-#       does NOT do round robin
-#       is the last layer
-#       is denoted by the letter 'L'
-l = Layer(2,None, False, True)
-l.letter = 'L'
-
 #define each process with a symbol and how long their execution time is
 a = Process('A', 0, 4)
 b = Process('B', 2, 17)
@@ -210,8 +193,6 @@ h.addUnreleasedProcess(e)
 #add each layer to list layers in order of execution
 layers = []
 layers.append(h)
-#layers.append(m)
-#layers.append(l)
 
 #loop through each layer until all processes have finished executing
 pointer = 0
