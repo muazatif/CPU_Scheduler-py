@@ -117,7 +117,7 @@ class Layer:
             label = self.processes[0].letter
             if label != lastProcess:
                 if lastProcess != '':
-                    self.record += (lastProcess + "[" + str(whenStart) + "," + str(self.currentTime) + "[; ")
+                    self.record += (lastProcess + "[" + str(whenStart) + "," + str(self.currentTime) + "]; ")
                 lastProcess = self.processes[0].letter
                 whenStart = self.currentTime
                 display = True
@@ -150,7 +150,7 @@ class Layer:
                 print("Time: ", t, "| Queue: ", self.letter, "| process time remaining: ", tn, "| process: ", label, "| current queue: ", self.getProcessAsStr(self.processes), unrelString, status)
         
         if lastProcess != '':
-            self.record += (lastProcess + "[" + str(whenStart) + "," + str(self.currentTime) + "[;")
+            self.record += (lastProcess + "[" + str(whenStart) + "," + str(self.currentTime) + "];")
         self.currentTime = 0
             
 
@@ -170,14 +170,14 @@ def processesToStr(array):
     return word
 
 #define each layer:
-# this layer h:
-#       runs for 6 time units before the next layer starts executing
-#       only allows a process to run once before moving it to the next layer
+# this layer S:
+#       no max execution time for each process
+#       processes never change layers
 #       does round robin
-#       is NOT the last layer
-#       is denoted by the letter 'H'
-h = Layer(None,None, True, True)
-h.letter = 'H'
+#       IS the last layer
+#       is denoted by the letter 'S'
+s = Layer(None,None, True, True)
+s.letter = 'S'
 #define each process with a symbol and how long their execution time is
 a = Process('A', 0, 4)
 b = Process('B', 2, 17)
@@ -186,15 +186,15 @@ d = Process('D', 7, 15)
 e = Process('E', 11, 3)
 
 #add each process to the layer that will run first
-h.addUnreleasedProcess(a)
-h.addUnreleasedProcess(b)
-h.addUnreleasedProcess(c)
-h.addUnreleasedProcess(d)
-h.addUnreleasedProcess(e)
+s.addUnreleasedProcess(a)
+s.addUnreleasedProcess(b)
+s.addUnreleasedProcess(c)
+s.addUnreleasedProcess(d)
+s.addUnreleasedProcess(e)
 
 #add each layer to list layers in order of execution
 layers = []
-layers.append(h)
+layers.append(s)
 
 #loop through each layer until all processes have finished executing
 pointer = 0
